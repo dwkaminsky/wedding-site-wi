@@ -577,11 +577,6 @@ h1 span {
   line-height: 1.15;
 }
 
-.charity-card > p:not(.charity-number) {
-  max-width: 520px;
-  color: #687068;
-}
-
 .charity-link {
   width: max-content;
   max-width: 100%;
