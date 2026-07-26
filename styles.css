@@ -439,13 +439,12 @@ h1 span {
 .note {
   margin-top: 2.5rem;
   padding: 1.6rem 2rem;
-  display: flex;
-  gap: 1.5rem;
   border-radius: 4px 18px 4px 18px;
   background: linear-gradient(110deg, var(--light-sage), #e8f1dc);
 }
 
-.note span {
+.note strong {
+  margin-right: 0.35rem;
   color: var(--sage);
   font-size: 0.7rem;
   font-weight: 600;
@@ -523,6 +522,77 @@ h1 span {
   color: #687068;
   font-size: 0.82rem;
   text-align: center;
+}
+
+.gift-intro {
+  max-width: 780px;
+  margin: -1.4rem 0 2.5rem;
+  padding: 1.5rem 1.8rem;
+  border-left: 4px solid var(--coral);
+  background: rgba(255, 253, 245, 0.64);
+  font-family: var(--serif);
+  font-size: 1.1rem;
+}
+
+.gift-intro p {
+  margin: 0;
+}
+
+.charity-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2rem;
+}
+
+.charity-card {
+  min-height: 340px;
+  padding: clamp(2rem, 5vw, 3.25rem);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(63, 124, 120, 0.2);
+  border-radius: 28px 6px 28px 6px;
+  background:
+    radial-gradient(circle at 92% 9%, rgba(244, 198, 93, 0.3) 0 46px, transparent 47px),
+    rgba(255, 253, 245, 0.76);
+  box-shadow: 0 14px 38px rgba(23, 61, 70, 0.05);
+}
+
+.charity-card:nth-child(2) {
+  background:
+    radial-gradient(circle at 92% 9%, rgba(185, 223, 225, 0.55) 0 46px, transparent 47px),
+    rgba(255, 253, 245, 0.76);
+}
+
+.charity-number {
+  color: var(--coral);
+  font-family: var(--serif);
+}
+
+.charity-card h3 {
+  max-width: 480px;
+  margin-bottom: 1rem;
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.charity-card > p:not(.charity-number) {
+  max-width: 520px;
+  color: #687068;
+}
+
+.charity-link {
+  width: max-content;
+  max-width: 100%;
+  margin-top: auto;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--coral);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  text-transform: uppercase;
 }
 
 .location-card {
@@ -732,6 +802,7 @@ footer p {
 
   .schedule-grid,
   .menu-grid,
+  .charity-grid,
   .hotel-grid,
   .location-card {
     grid-template-columns: 1fr;
@@ -748,6 +819,10 @@ footer p {
   .menu-course {
     min-height: auto;
     border-radius: 50px 50px 10px 10px;
+  }
+
+  .charity-card {
+    min-height: 300px;
   }
 
   .location-card {
@@ -771,8 +846,7 @@ footer p {
   }
 
   .note {
-    flex-direction: column;
-    gap: 0.5rem;
+    padding: 1.4rem 1.5rem;
   }
 }
 
