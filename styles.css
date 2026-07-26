@@ -181,6 +181,17 @@ button {
   pointer-events: none;
 }
 
+.hero::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background: url("assets/door-county-badger.webp") center / cover no-repeat;
+  opacity: 0.2;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
 .hero-content {
   position: relative;
   z-index: 2;
@@ -301,6 +312,7 @@ h1 span {
 
 .botanical {
   position: relative;
+  z-index: 1;
   width: 200px;
   height: 350px;
   opacity: 0.5;
@@ -690,6 +702,11 @@ footer p {
   .botanical {
     position: absolute;
     opacity: 0.18;
+  }
+
+  .hero::before {
+    background-position: 62% center;
+    opacity: 0.16;
   }
 
   .botanical-left {
