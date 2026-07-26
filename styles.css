@@ -169,18 +169,6 @@ button {
   text-align: center;
 }
 
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: auto 0 0;
-  height: 72px;
-  opacity: 0.46;
-  background:
-    radial-gradient(55px 22px at 55px 100%, transparent 97%, var(--lake) 100%) 0 0 / 110px 46px repeat-x,
-    linear-gradient(transparent 45%, rgba(94, 159, 168, 0.2));
-  pointer-events: none;
-}
-
 .hero::before {
   content: "";
   position: absolute;
@@ -309,43 +297,6 @@ h1 span {
   text-decoration: none;
   text-transform: uppercase;
 }
-
-.botanical {
-  position: relative;
-  z-index: 1;
-  width: 200px;
-  height: 350px;
-  opacity: 0.5;
-}
-
-.botanical::before {
-  content: "";
-  position: absolute;
-  width: 1px;
-  height: 340px;
-  top: 4px;
-  left: 100px;
-  background: var(--lake);
-  transform: rotate(22deg);
-  transform-origin: bottom;
-}
-
-.botanical span {
-  position: absolute;
-  width: 72px;
-  height: 30px;
-  border: 1px solid var(--lake);
-  background: rgba(185, 223, 225, 0.18);
-  border-radius: 100% 0 100% 0;
-  transform: rotate(-18deg);
-}
-
-.botanical span:nth-child(1) { top: 54px; left: 68px; }
-.botanical span:nth-child(2) { top: 125px; left: 107px; transform: rotate(160deg); }
-.botanical span:nth-child(3) { top: 196px; left: 47px; }
-.botanical span:nth-child(4) { top: 262px; left: 120px; transform: rotate(168deg); }
-.botanical-right { transform: scaleX(-1) rotate(-9deg); }
-.botanical-left { transform: rotate(-9deg); }
 
 .detail-panel {
   width: min(1180px, calc(100% - 3rem));
@@ -724,22 +675,9 @@ footer p {
     grid-template-columns: 1fr;
   }
 
-  .botanical {
-    position: absolute;
-    opacity: 0.18;
-  }
-
   .hero::before {
     background-position: 62% center;
     opacity: 0.16;
-  }
-
-  .botanical-left {
-    left: -80px;
-  }
-
-  .botanical-right {
-    right: -80px;
   }
 
   h1 {
