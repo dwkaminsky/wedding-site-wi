@@ -1,57 +1,27 @@
 const tabs = [...document.querySelectorAll(".tab")];
-const panels = [...document.querySelectorAll(".panel")];
+const panels = [...document.querySelectorAll("main > .panel")];
 const menuToggle = document.querySelector(".menu-toggle");
 const navigation = document.querySelector(".tabs");
 
-function showPanel(panelId, updateHistory = true) {
-  const nextPanel = document.getElementById(panelId);
-
-  if (!nextPanel) return;
-
+function setActiveSection(panelId) {
   tabs.forEach((tab) => {
-    const isActive = tab.dataset.tab === panelId;
+    const isActive = tab.hash === `#${panelId}`;
     tab.classList.toggle("active", isActive);
-    tab.setAttribute("aria-selected", String(isActive));
-    tab.tabIndex = isActive ? 0 : -1;
+    if (isActive) tab.setAttribute("aria-current", "page");
+    else tab.removeAttribute("aria-current");
   });
-
-  panels.forEach((panel) => {
-    const isActive = panel.id === panelId;
-    panel.hidden = !isActive;
-    panel.classList.toggle("active", isActive);
-  });
-
-  navigation.classList.remove("open");
-  menuToggle.setAttribute("aria-expanded", "false");
-
-  if (updateHistory) {
-    history.replaceState(null, "", `#${panelId}`);
-  }
-
-  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-tabs.forEach((tab, index) => {
-  tab.addEventListener("click", () => showPanel(tab.dataset.tab));
+function closeMenu() {
+  navigation.classList.remove("open");
+  menuToggle.setAttribute("aria-expanded", "false");
+}
 
-  tab.addEventListener("keydown", (event) => {
-    if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
-
-    event.preventDefault();
-    let nextIndex = index;
-
-    if (event.key === "ArrowRight") nextIndex = (index + 1) % tabs.length;
-    if (event.key === "ArrowLeft") nextIndex = (index - 1 + tabs.length) % tabs.length;
-    if (event.key === "Home") nextIndex = 0;
-    if (event.key === "End") nextIndex = tabs.length - 1;
-
-    tabs[nextIndex].focus();
-    showPanel(tabs[nextIndex].dataset.tab);
+tabs.forEach((tab) => {
+  tab.addEventListener("click", () => {
+    setActiveSection(tab.hash.slice(1));
+    closeMenu();
   });
-});
-
-document.querySelectorAll("[data-go-to]").forEach((button) => {
-  button.addEventListener("click", () => showPanel(button.dataset.goTo));
 });
 
 menuToggle.addEventListener("click", () => {
@@ -60,8 +30,16 @@ menuToggle.addEventListener("click", () => {
   navigation.classList.toggle("open", !isOpen);
 });
 
-window.addEventListener("hashchange", () => {
-  showPanel(window.location.hash.slice(1) || "home", false);
-});
+const observer = new IntersectionObserver(
+  (entries) => {
+    const visible = entries
+      .filter((entry) => entry.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
 
-showPanel(window.location.hash.slice(1) || "home", false);
+    if (visible) setActiveSection(visible.target.id);
+  },
+  { rootMargin: "-20% 0px -60% 0px", threshold: [0, 0.1, 0.25, 0.5] },
+);
+
+panels.forEach((panel) => observer.observe(panel));
+setActiveSection(window.location.hash.slice(1) || "home");
